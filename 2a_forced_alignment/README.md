@@ -27,7 +27,6 @@ scripts/
   make_figures.py        Praat figures (spectrogram + waveform + tiers of several runs)
   praat/                 Praat scripts used headless by the two scripts above
 notebooks/           Kaggle notebook that runs run_pipeline.sh (CPU only)
-manual_labels/       (optional, create it) hand-labelled Praat TextGrids with the same file names; every run is scored against them
 outputs/
   textgrids/<run>/   MFA TextGrids for each run, plus MFA's alignment_analysis.csv
   analysis/          CSV results of analyse_alignments.py
