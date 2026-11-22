@@ -1,0 +1,100 @@
+{
+ "wav_files": 5600,
+ "unique_contents": 2800,
+ "duplicate_groups": 2800,
+ "duplicate_examples": [
+  [
+   "ejlok1/toronto-emotional-speech-set-tess/TESS Toronto emotional speech set data/OAF_Fear/OAF_back_fear.wav",
+   "ejlok1/toronto-emotional-speech-set-tess/tess toronto emotional speech set data/TESS Toronto emotional speech set data/OAF_Fear/OAF_back_fear.wav"
+  ],
+  [
+   "ejlok1/toronto-emotional-speech-set-tess/TESS Toronto emotional speech set data/OAF_Fear/OAF_bar_fear.wav",
+   "ejlok1/toronto-emotional-speech-set-tess/tess toronto emotional speech set data/TESS Toronto emotional speech set data/OAF_Fear/OAF_bar_fear.wav"
+  ],
+  [
+   "ejlok1/toronto-emotional-speech-set-tess/TESS Toronto emotional speech set data/OAF_Fear/OAF_base_fear.wav",
+   "ejlok1/toronto-emotional-speech-set-tess/tess toronto emotional speech set data/TESS Toronto emotional speech set data/OAF_Fear/OAF_base_fear.wav"
+  ],
+  [
+   "ejlok1/toronto-emotional-speech-set-tess/TESS Toronto emotional speech set data/OAF_Fear/OAF_bath_fear.wav",
+   "ejlok1/toronto-emotional-speech-set-tess/tess toronto emotional speech set data/TESS Toronto emotional speech set data/OAF_Fear/OAF_bath_fear.wav"
+  ],
+  [
+   "ejlok1/toronto-emotional-speech-set-tess/TESS Toronto emotional speech set data/OAF_Fear/OAF_bean_fear.wav",
+   "ejlok1/toronto-emotional-speech-set-tess/tess toronto emotional speech set data/TESS Toronto emotional speech set data/OAF_Fear/OAF_bean_fear.wav"
+  ]
+ ],
+ "top_level_folders": {
+  "ejlok1": 5600
+ },
+ "leaf_folders": {
+  "OAF_Fear": 400,
+  "OAF_Pleasant_surprise": 400,
+  "OAF_Sad": 400,
+  "OAF_angry": 400,
+  "OAF_disgust": 400,
+  "OAF_happy": 400,
+  "OAF_neutral": 400,
+  "YAF_angry": 400,
+  "YAF_disgust": 400,
+  "YAF_fear": 400,
+  "YAF_happy": 400,
+  "YAF_neutral": 400,
+  "YAF_pleasant_surprised": 400,
+  "YAF_sad": 400
+ },
+ "speakers": {
+  "OAF": 2798,
+  "OA": 2,
+  "YAF": 2800
+ },
+ "emotions_from_name": {
+  "fear": 800,
+  "ps": 800,
+  "sad": 800,
+  "angry": 800,
+  "disgust": 800,
+  "happy": 800,
+  "neutral": 800
+ },
+ "words": 200,
+ "folder_vs_name_mismatch": [],
+ "sample_rates": {
+  "24414": 5598,
+  "96000": 2
+ },
+ "channels": {
+  "1": 5600
+ },
+ "seconds_min_median_max": [
+  1.254,
+  2.048,
+  2.985
+ ],
+ "unique_per_speaker_emotion": {
+  "OA_neutral": 1,
+  "OAF_angry": 200,
+  "OAF_disgust": 200,
+  "OAF_fear": 200,
+  "OAF_happy": 200,
+  "OAF_neutral": 199,
+  "OAF_ps": 200,
+  "OAF_sad": 200,
+  "YAF_angry": 200,
+  "YAF_disgust": 200,
+  "YAF_fear": 200,
+  "YAF_happy": 200,
+  "YAF_neutral": 200,
+  "YAF_ps": 200,
+  "YAF_sad": 200
+ },
+ "words_per_emotion": {
+  "fear": 200,
+  "ps": 200,
+  "sad": 200,
+  "angry": 200,
+  "disgust": 200,
+  "happy": 200,
+  "neutral": 200
+ }
+}

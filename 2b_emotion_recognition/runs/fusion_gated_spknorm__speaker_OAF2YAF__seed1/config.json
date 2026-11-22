@@ -1,0 +1,17 @@
+{
+ "epochs": 40,
+ "patience": 8,
+ "lr": 0.001,
+ "weight_decay": 0.01,
+ "batch_size": 32,
+ "pipeline": "fusion",
+ "fusion": "gated",
+ "speech_features": "wavlm",
+ "speaker_norm": true,
+ "split": "speaker_OAF2YAF",
+ "seed": 1,
+ "variant": "fusion_gated_spknorm",
+ "best_epoch": 40,
+ "best_val_macro_f1": 1.0,
+ "train_seconds": 60.3
+}

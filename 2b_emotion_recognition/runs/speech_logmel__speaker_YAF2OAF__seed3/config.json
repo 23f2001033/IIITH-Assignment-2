@@ -1,0 +1,15 @@
+{
+ "epochs": 40,
+ "patience": 8,
+ "lr": 0.001,
+ "weight_decay": 0.01,
+ "batch_size": 32,
+ "pipeline": "speech",
+ "features": "logmel",
+ "split": "speaker_YAF2OAF",
+ "seed": 3,
+ "variant": "speech_logmel",
+ "best_epoch": 25,
+ "best_val_macro_f1": 1.0,
+ "train_seconds": 50.7
+}

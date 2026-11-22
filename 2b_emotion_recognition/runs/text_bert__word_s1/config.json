@@ -1,0 +1,15 @@
+{
+ "epochs": 40,
+ "patience": 8,
+ "lr": 0.001,
+ "weight_decay": 0.01,
+ "batch_size": 32,
+ "pipeline": "text",
+ "features": "bert",
+ "split": "word_s1",
+ "seed": 1,
+ "variant": "text_bert",
+ "best_epoch": 7,
+ "best_val_macro_f1": 0.06937042015576048,
+ "train_seconds": 7.9
+}

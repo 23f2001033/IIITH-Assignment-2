@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Assignment 2: Forced Alignment and Multimodal Emotion Recognition</title>
+<style>
+  @page { size: A4; margin: 18mm 17mm; }
+  body { font-family: "Segoe UI", Arial, sans-serif; font-size: 10.3pt; line-height: 1.42; color: #1a1a1a; }
+  h1 { font-size: 19pt; margin: 0 0 3pt; }
+  h2 { font-size: 14pt; margin: 16pt 0 6pt; border-bottom: 1px solid #999; padding-bottom: 2pt; }
+  h3 { font-size: 11.3pt; margin: 11pt 0 4pt; }
+  p { margin: 0 0 6pt; }
+  ul, ol { margin: 0 0 6pt; padding-left: 17pt; }
+  li { margin-bottom: 2pt; }
+  table { border-collapse: collapse; width: 100%; margin: 5pt 0 9pt; font-size: 9.2pt; }
+  th, td { border: 1px solid #bbb; padding: 2.5pt 4.5pt; text-align: left; vertical-align: top; }
+  th { background: #eee; }
+  td.n, th.n { text-align: right; }
+  code { font-family: Consolas, monospace; font-size: 8.8pt; }
+  .meta { color: #555; margin-bottom: 10pt; }
+  figure { margin: 6pt 0 9pt; }
+  figure img { width: 100%; }
+  figure.half img { width: 62%; display: block; margin: 0 auto; }
+  figure.praat img { width: 88%; display: block; margin: 0 auto; }
+  figcaption { font-size: 8.8pt; color: #444; margin-top: 2pt; }
+  tr, figure { break-inside: avoid; }
+  h2, h3 { break-after: avoid; }
+  .page { break-before: page; }
+</style>
+</head>
+<body>
+
+<h1>Assignment 2: Forced Alignment and Multimodal Emotion Recognition</h1>
+<p class="meta">Aman Kumar Maurya &nbsp;·&nbsp; 23f2001033@ds.study.iitm.ac.in<br>Repository: github.com/23f2001033/IIITH-Assignment-2 &nbsp;·&nbsp; Part A in <code>2a_forced_alignment/</code>, Part B in <code>2b_emotion_recognition/</code></p>
+
+<h2>Summary</h2>
+<p><strong>Part A.</strong> I aligned the six provided recordings at word and phone level with the Montreal Forced Aligner (MFA 3.4.4). The pipeline runs five alignments: two pretrained acoustic models with their own phone sets, a model adapted to these speakers, a run without the custom dictionary, and a run with MFA's default beam. The custom dictionary covers the out-of-vocabulary words with G2P, and I checked and corrected those entries by hand. On the read news speech the two pretrained models agree closely (92% of word boundaries within 20 ms). On the non-native ISLE prompts they disagree badly at the edges of speech: <code>english_mfa</code> stretches the final stop of an utterance over up to 2.5 s of trailing silence. Speaker adaptation raises the alignment likelihood, most for the learner (about +4 per frame against +0.9 for the newsreader), but moves only 23 of 2,126 phone boundaries. Vowel formants measured inside the aligned intervals show where the learner departs from the target vowels.</p>
+<p><strong>Part B.</strong> I built speech-only, text-only and fusion emotion classifiers for TESS: frozen WavLM or BERT features, a BiLSTM with attention pooling, and gated or concatenation fusion. I tested them on random, unseen-word and unseen-speaker splits. Speech models reach 99.4–100% on the first two, so those splits cannot separate the models. On an unseen speaker the best speech model drops to 61.9 ± 7.9% (10 runs), and its result depends strongly on the training seed. Text-only stays at chance (14.3%), because every TESS sentence is "Say the word <em>X</em>" in all seven emotions. Accordingly, the learned fusion gate puts all its weight on speech, and fusion does not beat speech-only beyond seed noise. The clearest effect is pretrained features: WavLM beats log-mel by 20 points on all 10 paired runs. Errors on a new speaker are systematic. Each actress expresses some emotions with a different tempo, and the model learns the training speaker's version.</p>
+
+<h1 class="page" style="font-size:16pt">Part A: Forced alignment with MFA</h1>
+
+<h2>A1. Data and setup</h2>
+<table>
+<tr><th>Files</th><th>Content</th><th>Speaker</th><th>Length</th></tr>
+<tr><td><code>F2BJRLP1–3</code></td><td>Boston University radio news passages</td><td>one professional female newsreader</td><td>25–31 s each</td></tr>
+<tr><td>ISLE <code>…BLOCKD02_01–03</code></td><td>learner prompts: "I said WHITE not BAIT", "NEW not NO", "BAD not BED"</td><td>one adult non-native speaker; F0 92–118 Hz in the measured vowels, so most likely male</td><td>about 4 s each</td></tr>
+</table>
+<p>All files are 16 kHz mono and are used unchanged. MFA was installed from conda-forge (it needs the Kaldi and OpenFST binaries) and run on a Kaggle CPU notebook; <code>scripts/run_pipeline.sh</code> runs every step below in one command, and the README lists the individual commands.</p>
+
+<h3>Transcript normalisation</h3>
+<p>MFA matches words to the dictionary literally, so the transcripts were normalised to what was actually spoken. <code>prepare_corpus.py</code> logs every change (<code>data/normalisation_log.csv</code>); there are six:</p>
+<table>
+<tr><th>File</th><th>Before</th><th>After</th><th>Reason</th></tr>
+<tr><td>F2BJRLP1</td><td>S.J.C.'s</td><td>S J C's</td><td>a dotted initialism is spoken letter by letter</td></tr>
+<tr><td>F2BJRLP1</td><td>WBUR's</td><td>W B U R's</td><td>the station name is spoken as letters</td></tr>
+<tr><td>F2BJRLP2</td><td>seventy- six, seventy- one</td><td>seventy six, seventy one</td><td>a hyphen followed by a space would otherwise create the non-word "seventy-"</td></tr>
+<tr><td>F2BJRLP2</td><td>de-politicize</td><td>depoliticize</td><td>one word; "de" alone would be aligned as a separate word</td></tr>
+<tr><td>F2BJRLP3</td><td>thirty- five</td><td>thirty five</td><td>as above</td></tr>
+</table>
+<p>Other punctuation is removed, and apostrophes inside words are kept, because the dictionaries list possessives such as <code>hennessy's</code>.</p>
+
+<h3>Dictionary: base, G2P and hand corrections</h3>
+<p>With the <code>english_us_arpa</code> dictionary, 4 words are out of vocabulary (OOV): <em>depoliticize, dukakis, maffy, melnicove</em>. The <code>english_us_mfa</code> dictionary has 11 OOVs, because it also lacks some possessives and letter names: <em>c's, r's, hennessy's, state's, year's, judgeships, margo</em>. I generated pronunciations with the matching pretrained G2P model and checked each one; <code>apply_overrides.py</code> then merges the base dictionary, the G2P output and the hand corrections, and rejects any phone that is not in the model's phone set.</p>
+<table>
+<tr><th>Word</th><th>G2P output</th><th>Used</th><th>Why changed</th></tr>
+<tr><td>depoliticize</td><td><code>D EH1 P AH0 L AY1 T AH0 S AY2 Z</code></td><td><code>D IY0 P AH0 L IH1 T IH0 S AY2 Z</code></td><td>G2P produced "DEP-uh-LIGHT-uh-size": the wrong first vowel, a diphthong in the stem and the wrong stress. The prefix is /di/ and the stem follows <em>politics</em>.</td></tr>
+<tr><td>dukakis</td><td><code>D UW1 K AA1 K IH0 S</code></td><td><code>D UW0 K AA1 K AH0 S</code></td><td>Two primary stresses; the name is du-KAH-kis, stressed on the second syllable only.</td></tr>
+<tr><td>c's, r's (MFA set)</td><td><code>kʰ z</code>, <code>ɹ z</code></td><td>pronunciations of <em>seas</em>, <em>are</em> + z</td><td>G2P read the letters as sounds; they are the letter names "see" and "ar" plus the possessive.</td></tr>
+</table>
+<p>The other G2P entries were accepted (for example <code>maffy M AE1 F IY0</code>, <code>melnicove M EH1 L N IH0 K OW2 V</code>). One accepted entry is wrong and I found it only while writing this report: <code>state's → s t ej t z</code> in the MFA set should end in /s/, since the possessive is voiceless after /t/. It affects one sibilant in one run (B).</p>
+<p>A quirk worth recording: <code>mfa validate</code> reports "19 OOV word types, 43 tokens" for the ARPA setup, but its own list of OOVs found contains only the 4 words above. The larger count includes single letters (the spelled-out initials), which are in the dictionary. This is a counting bug in MFA 3.4.4's validator, not a dictionary problem.</p>
+
+<h2>A2. Alignment runs</h2>
+<table>
+<tr><th>Run</th><th>Acoustic model</th><th>Dictionary</th><th>Question it answers</th></tr>
+<tr><td>A_arpa</td><td><code>english_us_arpa</code></td><td>ARPA + checked G2P</td><td>main alignment</td></tr>
+<tr><td>B_mfa</td><td><code>english_mfa</code></td><td>MFA (IPA-like) + checked G2P</td><td>does a second model with a different phone set agree?</td></tr>
+<tr><td>C_adapted</td><td>A adapted to these speakers (<code>mfa adapt</code>)</td><td>as A</td><td>does speaker adaptation move boundaries?</td></tr>
+<tr><td>D_no_g2p</td><td><code>english_us_arpa</code></td><td>base dictionary only</td><td>what happens to OOV words without G2P?</td></tr>
+<tr><td>A_default_beam</td><td>as A</td><td>as A</td><td>are the wider beams (<code>--beam 100 --retry_beam 400</code>) needed?</td></tr>
+</table>
+<p>Run C uses a workaround. <code>mfa adapt --output_directory</code> wrote the alignment made <em>before</em> adaptation (its log says "Alignment already done, skipping"). So the pipeline saves the adapted model and then aligns again with it. All five runs aligned all six files.</p>
+
+<h2>A3. Alignment visualisations</h2>
+<p>The figures are drawn by Praat from scripts (<code>make_figures.py</code>): a spectrogram (0–5 kHz) above the waveform, with the word and phone tiers of several runs stacked underneath. The merged TextGrids are in <code>outputs/comparison/</code> and can be opened in Praat.</p>
+<figure class="praat"><img src="img/isle_01_white_bait.png"><figcaption>Figure A1. "I said WHITE not BAIT", runs A (top two tiers), B, C. A and C agree everywhere and end BAIT at 2.25 s, during the release of the final /t/. B's final /t/ lasts from 2.05 s to the end of the file (4.125 s), although after about 2.4 s there is only silence.</figcaption></figure>
+<figure class="praat"><img src="img/isle_02_new_no.png"><figcaption>Figure A2. "I said NEW not NO", runs A, B, C. B ends NEW at 1.29 s and starts NOT there (460 ms long), while A ends NEW at 1.42 s. Between 1.29 and 1.42 s the waveform is still the decaying vowel of NEW with its formants visible, so A's boundary is the more plausible one. Both models chose the /nju/ variant of NEW (A: <code>N Y UW1</code>, B: <code>ɲ ʉː</code>), matching the falling F2 at the start of the vowel.</figcaption></figure>
+<figure class="praat"><img src="img/news2_dukakis_depoliticize.png"><figcaption>Figure A3. F2BJRLP2, 1.9–7.2 s, runs A (with the corrected dictionary) and D (no G2P). In D the OOV words <em>dukakis</em> and <em>depoliticize</em> become a single unknown-speech interval <code>spn</code> with no phones inside, but the surrounding words keep their boundaries.</figcaption></figure>
+
+<h2>A4. Observations</h2>
+<h3>How much do the runs agree?</h3>
+<p>Word boundaries of each run were matched to run A (word sequences aligned with <code>difflib</code>), and the absolute time differences were measured (<code>outputs/analysis/agreement.csv</code>):</p>
+<table>
+<tr><th>Comparison</th><th>Files</th><th class="n">Boundaries</th><th class="n">Mean |Δ| ms</th><th class="n">Median</th><th class="n">Max</th><th class="n">≤ 20 ms</th><th class="n">≤ 50 ms</th></tr>
+<tr><td>A vs B (other model)</td><td>news</td><td class="n">456</td><td class="n">8.2</td><td class="n">10</td><td class="n">250</td><td class="n">91.9%</td><td class="n">97.6%</td></tr>
+<tr><td>A vs B</td><td>ISLE</td><td class="n">30</td><td class="n">172.8</td><td class="n">10</td><td class="n">2460</td><td class="n">63.3%</td><td class="n">76.7%</td></tr>
+<tr><td>A vs C (adapted)</td><td>news</td><td class="n">456</td><td class="n">0.1</td><td class="n">0</td><td class="n">10</td><td class="n">100%</td><td class="n">100%</td></tr>
+<tr><td>A vs C</td><td>ISLE</td><td class="n">30</td><td class="n">0.0</td><td class="n">0</td><td class="n">0</td><td class="n">100%</td><td class="n">100%</td></tr>
+<tr><td>A vs D (no G2P)</td><td>news</td><td class="n">456</td><td class="n">0.6</td><td class="n">0</td><td class="n">20</td><td class="n">99.1%</td><td class="n">100%</td></tr>
+<tr><td>A vs default beam</td><td>news</td><td class="n">456</td><td class="n">0.1</td><td class="n">0</td><td class="n">10</td><td class="n">100%</td><td class="n">100%</td></tr>
+<tr><td>A vs default beam</td><td>ISLE</td><td class="n">30</td><td class="n">2.3</td><td class="n">0</td><td class="n">50</td><td class="n">93.3%</td><td class="n">100%</td></tr>
+</table>
+<figure><img src="img/model_agreement.png"><figcaption>Figure A4. Distribution of word-boundary differences from run A (clipped at 100 ms).</figcaption></figure>
+<ul>
+<li><strong>The two pretrained models agree on fluent read speech.</strong> On the news passages, B differs from A by a median of one 10 ms frame. MFA works with 10 ms frames, so boundaries are quantised to 10 ms and a 10 ms difference is the smallest possible one.</li>
+<li><strong>They disagree at the edges of the learner's speech.</strong> The ISLE prompts end with a stop consonant followed by 2 s or more of silence. B extends the final stop to the end of the file: BAIT's /t/ runs to 4.125 s and BED's /d/ to 4.5 s, giving the 2.46 s maximum. A and C end these words at 2.25 s and 2.04 s, at the release. A likely reason is that <code>english_mfa</code> is trained on more varied data in which stop closures and low-level noise look alike; the trailing silence here contains faint noise rather than digital silence. Either way, sentence-final boundaries from B need checking on this kind of data.</li>
+<li><strong>Adaptation fits the model better but barely moves boundaries.</strong> MFA's per-frame log-likelihood rose by +0.92 to +0.94 on the three news files and by +3.70 to +4.94 on the three ISLE files. The learner's speech is further from the native-speaker training data, so adaptation helps it more. Yet only 23 of the 2,126 phone boundaries moved (maximum 50 ms), and no word boundary on ISLE moved at all. The adapted model is more confident about the same segmentation.</li>
+<li><strong>Without G2P, OOV words become <code>spn</code>, and the damage stays local.</strong> Run D labels the five OOV tokens (dukakis ×2, melnicove, depoliticize, maffy) as unknown speech. The word boundaries around them still match A (99.1% within 20 ms, maximum 20 ms), but the phone-level information inside those words is lost (1,031 phones against 1,063 in A). So G2P mattered for phone analysis, not for word timing.</li>
+<li><strong>The wider beam was not needed.</strong> With MFA's default beam, the news files align identically, and on ISLE one boundary moves by 50 ms.</li>
+</ul>
+
+<h3>Errors and suspicious intervals</h3>
+<ul>
+<li><strong>Phones at the minimum duration.</strong> MFA's acoustic models give each phone 3 HMM states, and at least one 10 ms frame each, so no phone can be shorter than 30 ms. In run A, 81 of 1,063 phones sit exactly at this 30 ms floor (98 in B), all of them in the fast news speech. Most are consonants inside clusters, /t/ (15) and /n/ (14) above all, in words such as <em>important</em>, <em>appointment(s)</em>, <em>court</em> and <em>Massachusetts</em>; the rest are mostly reduced vowels (/ə/, 8). Their true duration may be shorter than 30 ms, so the boundaries on either side are approximate by about a frame.</li>
+<li><strong>Long pauses.</strong> A has 13 pauses of 300 ms or more (0.31–0.70 s), all in the news passages, between phrases. They are worth listening to, because a long pause is where an aligner hides a word it could not place; none of the 243 words per run is missing in any run.</li>
+<li><strong>Boundary placement around the minimal pairs.</strong> In Figure A2, B's NOT (1.29–1.75 s) starts 130 ms inside the vowel of NEW. Apart from these, A and B place only 8 of the 30 ISLE word boundaries in the same 10 ms frame, against half of the news boundaries (Figure A4): on the learner's speech the two models diverge more even where neither fails.</li>
+</ul>
+
+<h3>What the alignment shows about the learner's vowels</h3>
+<p>I measured F1 and F2 (Praat, Burg method, maximum 5 kHz) at 25%, 50% and 75% of each target vowel as aligned by run A, plus mean F0. This uses the alignment for what it is usually needed for: finding the segments to measure. The reference crosses are the average US English male vowels of Hillenbrand et al. (1995). They show only the rough target region, since each vowel here is a single token.</p>
+<figure class="half"><img src="img/isle_vowel_chart.png"><figcaption>Figure A5. Learner vowels: midpoint (dot) and movement from 25% to 75% (line); grey crosses are the US male averages.</figcaption></figure>
+<table>
+<tr><th>Word (vowel)</th><th class="n">Duration</th><th class="n">F1 / F2 at midpoint (Hz)</th><th>Observation</th></tr>
+<tr><td>BAIT (EY)</td><td class="n">200 ms</td><td class="n">406 / 1899</td><td>a clear diphthong: F1 falls 518 → 317 and F2 rises 1717 → 2086</td></tr>
+<tr><td>WHITE (AY)</td><td class="n">150 ms</td><td class="n">546 / 1389</td><td>also a diphthong (F2 1172 → 1657), but its start is less open than a US /aɪ/</td></tr>
+<tr><td>BAD (AE) vs BED (EH)</td><td class="n">220 / 180 ms</td><td class="n">594 / 1767 vs 527 / 1836</td><td>the contrast is there but small: BAD is 67 Hz more open, 69 Hz further back and 40 ms longer</td></tr>
+<tr><td>NOT (AA), 3 tokens</td><td class="n">60–70 ms</td><td class="n">F1 495–571, F2 1216–1280</td><td>short and much less open than US /ɑ/ (F1 about 770): closer to a short rounded [ɒ]/[ɔ]</td></tr>
+<tr><td>NEW (UW)</td><td class="n">230 ms</td><td class="n">300 / 1203</td><td>F2 well above the back /u/ reference: a fronted [ʉ]</td></tr>
+<tr><td>NO (OW)</td><td class="n">350 ms</td><td class="n">377 / 847</td><td>high and back, with little glide: closer to [o] or [u] than to a US /oʊ/</td></tr>
+</table>
+<p>Caveats: each word is one token from one speaker; the formant tracker can be pulled by neighbouring consonants in a 60 ms vowel; and the US reference is not the learner's target accent. The point is that the alignment is good enough to measure from, and that the measurements are consistent with the contrasts the prompts test (BAD/BED, NOT/NO).</p>
+
+<h3>Limitations</h3>
+<ul>
+<li>Agreement between models is not accuracy: two models can agree on a wrong boundary. Where they disagree on ISLE, I judged from the spectrogram; hand-labelled reference boundaries would turn that into a measured error.</li>
+<li>With 10 ms frames and a 30 ms minimum phone length, MFA cannot resolve boundaries more finely than about 10 ms, or very short phones at all.</li>
+<li>Speaker adaptation used only 97 s of speech from two speakers; with more data it might move boundaries more.</li>
+</ul>
+
+<h1 class="page" style="font-size:16pt">Part B: Multimodal emotion recognition on TESS</h1>
+
+<h2>B1. Data and evaluation design</h2>
+<p>TESS has two actresses (OAF, aged 64; YAF, aged 26), each saying "Say the word <em>X</em>" for the same 200 words in seven emotions. Before modelling, I audited the Kaggle copy (<code>scripts/audit_tess.py</code>):</p>
+<ul>
+<li><strong>Every recording appears twice.</strong> The 5,600 wav files contain only 2,800 distinct recordings, because the whole set is duplicated in a nested folder. Without de-duplication (by content hash), the same recording would land in both training and test data, inflating accuracy.</li>
+<li><strong>Sample rates differ.</strong> Most files are 24,414 Hz and two are 96 kHz, so everything is resampled to 16 kHz.</li>
+<li><strong>Labels come from folder names.</strong> One file is misnamed (<code>OA_bite_neutral.wav</code>), so speaker and emotion are read from the folder.</li>
+<li><strong>The text carries no emotion.</strong> Every word occurs in all seven emotions and the sentence frame never changes. A text-only model therefore cannot beat chance (14.3%). This makes TESS a clean test of whether a fusion model correctly ignores an uninformative modality.</li>
+</ul>
+<table>
+<tr><th>Split</th><th>Held out</th><th class="n">Train / val / test</th><th>Repeats</th></tr>
+<tr><td>Random</td><td>15% of clips, stratified by speaker × emotion</td><td class="n">1960 / 420 / 420</td><td>3 different splits</td></tr>
+<tr><td>Word-disjoint</td><td>30 test words never seen in training, in any emotion</td><td class="n">1960 / 420 / 420</td><td>3 different splits</td></tr>
+<tr><td>Speaker-independent</td><td>the other actress; validation is 15% of the training speaker's words</td><td class="n">1190 / 210 / 1400</td><td>both directions × 5 seeds</td></tr>
+</table>
+<p>The random split is what most TESS results report, but there the same actress saying the same word in other emotions is in the training data. The word split rules out memorising words, and the speaker split asks whether emotion is recognised in an unfamiliar voice. That split turned out to be the only informative one, and its results vary between training runs, so it was repeated with 5 seeds.</p>
+
+<h2>B2. Architecture, block by block</h2>
+<table>
+<tr><th style="width:15%">Block</th><th style="width:43%">Choice</th><th>Reason</th></tr>
+<tr><td>Preprocessing</td><td>Speech: mono, 16 kHz, silence trimmed (30 dB below peak), peak-normalised. Text: lower-cased, BERT WordPiece tokens.</td><td>The encoders expect 16 kHz input. Leading and trailing silence carries no emotion and varies between clips; after trimming, the mean clip length per speaker and emotion is 1.5–2.5 s.</td></tr>
+<tr><td>Feature extraction</td><td>Frozen <strong>WavLM Base+</strong>: a learned softmax-weighted sum of all 13 hidden layers (768-d, 50 frames/s). Baseline: 80-band <strong>log-mel</strong> spectrogram. Text: frozen <strong>BERT-base-uncased</strong>, also a weighted sum of 13 layers.</td><td>2,800 clips are too few to fine-tune a 95M-parameter encoder without overfitting to two voices. Different layers of self-supervised models encode different information (lower layers acoustics and prosody, upper layers phonetic content), so the model learns which to use rather than me guessing one layer. Log-mel tests whether pretraining matters.</td></tr>
+<tr><td>Temporal / contextual modelling</td><td>LayerNorm → linear 256 + GELU → <strong>BiLSTM</strong> (2 layers over speech frames; 1 layer over text tokens) → <strong>attention pooling</strong> to one 256-d vector per clip.</td><td>Emotion is carried by the pitch contour, energy and rhythm across the whole utterance, so the model needs context in both directions. Attention pooling can weight the emotionally loaded target word more than the fixed carrier phrase. The 256-d pooled vector is the representation shown in the t-SNE plots.</td></tr>
+<tr><td>Fusion</td><td><strong>Gated</strong>: <code>g = softmax(W[h_s; h_t])</code> gives two weights per clip, and the fused vector is <code>g_s·h_s + g_t·h_t</code>. <strong>Concat</strong>: <code>GELU(W[h_s; h_t])</code>.</td><td>The gate makes the fusion inspectable: it shows per clip how much the model relies on each modality. Concatenation is the standard comparison and can, in principle, learn interactions between the two.</td></tr>
+<tr><td>Classifier</td><td>MLP 256 → 128 → 7, dropout 0.3</td><td>A small head; the representation does the work.</td></tr>
+</table>
+<p>Training: AdamW (learning rate 1e-3, weight decay 1e-2), batch 32, cross-entropy, gradient clipping at 1.0, up to 40 epochs. The checkpoint with the best validation macro-F1 is kept (patience 8). The encoders are frozen, so features are extracted once (2.5 min on a T4 GPU), and all 100 training runs took about 90 minutes. Training is deterministic: seed 0 of the repeated speaker runs reproduced the first run exactly.</p>
+<p>One addition targets the unseen-speaker problem: <strong>per-speaker normalisation</strong>. Each speech feature is z-scored with the mean and standard deviation of all frames from the same speaker. It uses no emotion labels, but it does use the new speaker's unlabelled recordings, so in deployment some audio from a speaker is needed before predicting.</p>
+
+<h2>B3. Experiments: speech vs text vs fusion</h2>
+<table>
+<tr><th>Model (accuracy %, mean ± std, n runs)</th><th class="n">Random</th><th class="n">Unseen words</th><th class="n">Unseen speaker</th></tr>
+<tr><td>Speech: WavLM + BiLSTM</td><td class="n">99.9 ± 0.1 (3)</td><td class="n">99.9 ± 0.1 (3)</td><td class="n">61.9 ± 7.9 (10)</td></tr>
+<tr><td>Speech: log-mel + BiLSTM (baseline)</td><td class="n">99.5 ± 0.0 (3)</td><td class="n">99.6 ± 0.2 (3)</td><td class="n">41.9 ± 11.2 (10)</td></tr>
+<tr><td>Speech: WavLM + speaker normalisation</td><td class="n">–</td><td class="n">–</td><td class="n">62.5 ± 5.6 (10)</td></tr>
+<tr><td>Text: BERT + BiLSTM</td><td class="n">12.0 ± 2.2 (3)</td><td class="n">14.3 ± 0.0 (3)</td><td class="n">14.3 ± 0.0 (2)</td></tr>
+<tr><td>Fusion: gated</td><td class="n">100.0 ± 0.0 (3)</td><td class="n">99.9 ± 0.1 (3)</td><td class="n">64.5 ± 7.2 (10)</td></tr>
+<tr><td>Fusion: concat</td><td class="n">99.8 ± 0.2 (3)</td><td class="n">99.4 ± 0.4 (3)</td><td class="n">59.3 ± 7.9 (10)</td></tr>
+<tr><td>Fusion: gated + speaker normalisation</td><td class="n">–</td><td class="n">–</td><td class="n">58.3 ± 4.9 (10)</td></tr>
+</table>
+<p>Macro-F1 tables are in <code>Results/accuracy_table_macro_f1.md</code>; they rank the models the same way. Because the speaker-split numbers vary so much between seeds, I compared models on the <em>same</em> split and seed (table below): this pairs away the variation that comes from the split itself.</p>
+<table>
+<tr><th>Unseen speaker: A minus B, same split and seed</th><th class="n">Accuracy difference (points)</th><th class="n">A better in</th><th class="n">Range</th></tr>
+<tr><td>WavLM vs log-mel</td><td class="n">+19.9 ± 8.2</td><td class="n">10 / 10</td><td class="n">+9.4 to +36.1</td></tr>
+<tr><td>Gated fusion vs speech only</td><td class="n">+2.6 ± 8.7</td><td class="n">6 / 10</td><td class="n">−12.4 to +16.3</td></tr>
+<tr><td>Concat fusion vs speech only</td><td class="n">−2.5 ± 6.7</td><td class="n">4 / 10</td><td class="n">−12.4 to +8.1</td></tr>
+<tr><td>Speaker normalisation (speech model)</td><td class="n">+0.6 ± 6.6</td><td class="n">7 / 10</td><td class="n">−11.6 to +13.8</td></tr>
+<tr><td>Speaker normalisation (gated fusion)</td><td class="n">−6.2 ± 9.3</td><td class="n">2 / 10</td><td class="n">−23.5 to +8.3</td></tr>
+</table>
+<figure><img src="img/speaker_seed_spread.png"><figcaption>Figure B1. Unseen-speaker accuracy of every seed. Training on the older voice and testing on the younger (blue) is easier than the reverse (red) for every speech model: WavLM 68.2% vs 55.5%.</figcaption></figure>
+<ul>
+<li><strong>Random and unseen-word splits are solved</strong> by every speech model. At 99–100%, they cannot rank the models. This is the setting in which near-perfect TESS accuracies are usually reported.</li>
+<li><strong>An unseen speaker is hard and noisy.</strong> The same WavLM model scores between 45.8% and 73.0% depending on the seed. A single run would have been misleading: my first run showed gated fusion 15 points ahead of speech-only, and over 10 paired runs the difference is +2.6 ± 8.7.</li>
+<li><strong>Pretrained speech features are the one clear win:</strong> +20 points over log-mel, in all 10 pairs.</li>
+<li><strong>Speaker normalisation reduces the spread</strong> (std 7.9 → 5.6) and helps the harder direction (55.5 → 58.6%), but its average effect (+0.6) is within noise. It hurt the gated fusion.</li>
+</ul>
+
+<h2>B4. Easiest and hardest emotions</h2>
+<p>On random and unseen-word splits every emotion is at F1 0.99–1.00, so the differences show only for an unseen speaker. Speech model (WavLM), per-emotion F1 averaged over the 10 speaker runs:</p>
+<table>
+<tr><th>angry</th><th>disgust</th><th>fear</th><th>happy</th><th>neutral</th><th>pleasant surprise</th><th>sad</th></tr>
+<tr><td>0.32</td><td>0.70</td><td>0.78</td><td><strong>0.08</strong></td><td><strong>0.88</strong></td><td>0.32</td><td>0.83</td></tr>
+</table>
+<figure><img src="img/confusion_speech_wavlm.png"><figcaption>Figure B2. Confusion matrices of the WavLM speech model (% of each true emotion, summed over runs).</figcaption></figure>
+<p><strong>Easiest: neutral (96% recall), fear (90%), sad (87%), disgust (86%).</strong> These are expressed the same way by both actresses: neutral and sad are low in energy and pitch movement, and sad is the slowest emotion for both. <strong>Hardest: happy (5% recall), pleasant surprise (31%) and angry (38%).</strong> These are the high-arousal emotions, and the two actresses express them differently. The trimmed clip durations show one measurable difference:</p>
+<table>
+<tr><th>Mean duration (s)</th><th class="n">angry</th><th class="n">disgust</th><th class="n">fear</th><th class="n">happy</th><th class="n">neutral</th><th class="n">pleasant surprise</th><th class="n">sad</th></tr>
+<tr><td>OAF (older)</td><td class="n"><strong>1.48</strong></td><td class="n">2.31</td><td class="n">1.54</td><td class="n"><strong>1.97</strong></td><td class="n">2.01</td><td class="n">2.00</td><td class="n">2.52</td></tr>
+<tr><td>YAF (younger)</td><td class="n"><strong>2.04</strong></td><td class="n">2.39</td><td class="n">1.62</td><td class="n"><strong>1.67</strong></td><td class="n">2.03</td><td class="n">1.88</td><td class="n">2.17</td></tr>
+</table>
+<p>OAF's angry is short and fast, like both speakers' fear, while YAF's angry is slow. For happy it is the other way round. Trained on YAF and tested on OAF, the model calls 67% of OAF's (fast) angry clips <em>fear</em>. Trained on OAF and tested on YAF, it calls 96% of YAF's (fast) happy clips <em>angry</em>. The model has learned each emotion as the training actress performs it, including her tempo.</p>
+
+<h2>B5. When does fusion help?</h2>
+<p>On TESS, never, and the model shows why. The gate's weight on speech is 1.000 for every test clip in every split (Figure B3, left). Gated fusion has learned to ignore the text completely, which is the correct behaviour for an uninformative modality. Its differences from speech-only therefore come from training a new speech branch. Across the 10 speaker runs, gated fusion fixed 1,729 clips that speech-only got wrong, but broke 1,367 that speech-only got right: 22% of the 14,000 predictions changed in each direction, for a net +2.6 points. That churn is seed variation, not information from the text. Concat fusion cannot switch the text off, and it does slightly worse (−2.5 points, 4 of 10).</p>
+<figure><img src="img/fusion_gate_and_layer_weights.png"><figcaption>Figure B3. Left: gated-fusion weight on speech per test clip. Right: learned layer weights. WavLM moves weight towards its lower layers (acoustic and prosodic information), and BERT shows a weaker pattern; both stay close to uniform.</figcaption></figure>
+<p>Fusion helps when the two modalities carry <em>complementary</em> evidence: the words carry sentiment ("I can't believe you did this") while the voice is ambiguous, or the audio is noisy while the text is clean. This happens in conversational datasets such as IEMOCAP or MELD. The gate would then be expected to move away from 1 on exactly those clips. Here, the right test of a fusion model is that it does not get worse when one modality is useless; the gated model passes that test, and concatenation passes it less well.</p>
+
+<h2>B6. Failure cases</h2>
+<table>
+<tr><th style="width:24%">Case</th><th style="width:27%">What happens</th><th>Why</th></tr>
+<tr><td>1. YAF happy → angry (train OAF), e.g. <code>YAF_dab_happy</code>, <code>YAF_dead_happy</code>, <code>YAF_fail_happy</code></td><td>96% of YAF's happy clips are called angry, with confidence 1.0, in all 5 seeds.</td><td>YAF's happy is fast and high-energy, matching OAF's angry (1.67 s against 1.48 s), while OAF's own happy is slow (1.97 s). The model's notion of "angry" is OAF's.</td></tr>
+<tr><td>2. OAF angry → fear (train YAF), e.g. <code>OAF_tough_angry</code>, <code>OAF_which_angry</code></td><td>67% of OAF's angry clips are called fear.</td><td>The mirror image of case 1: YAF's angry is slow (2.04 s), and the only fast, tense emotion it learned from YAF is fear (1.62 s).</td></tr>
+<tr><td>3. OAF happy and pleasant surprise → disgust (train YAF), e.g. <code>OAF_back_happy</code>, <code>OAF_bath_pleasant_surprise</code></td><td>75% and 79% of these clips are called disgust, with confidence 1.0.</td><td>Duration does not explain this one (OAF happy 1.97 s vs YAF disgust 2.39 s). I have not measured the cause; a likely candidate is voice quality and pitch range, since the older voice is lower and less variable, so her positive emotions may lack the pitch excursions YAF uses for them. This is a hypothesis.</td></tr>
+<tr><td>4. <code>YAF_goal_pleasant_surprise</code> → happy (gated fusion, word split)</td><td>The only clip any gated model got wrong on unseen words (confidence 0.80).</td><td>Pleasant surprise and happy are the closest pair: both positive and high-arousal. With every other cue equal, these two are the first to merge.</td></tr>
+<tr><td>5. Text model, every clip</td><td>The same prediction for all 7 emotions of a word; 12–14% accuracy.</td><td>The input "say the word goal" is identical across emotions, so the output must be too. This failure is built into the data, not the model.</td></tr>
+</table>
+
+<h2>B7. Cluster separability of the learned representations</h2>
+<p>t-SNE of the 256-d test representations from the temporal block (speech model), the contextual block (text model) and the fusion block (gated fusion, plus its two branches). The silhouette score measures how well the emotion labels separate the representation: 1 means tight, separate clusters, and 0 means no structure. It is computed with cosine distance on the full 256-d vectors, not on the 2-D projection.</p>
+<figure><img src="img/tsne_word_s0.png"><figcaption>Figure B4. Unseen-word split (both speakers in test; circles OAF, triangles YAF). Speech and fusion: seven clean clusters (silhouette 0.97 and 0.98). Text: no structure (−0.02).</figcaption></figure>
+<figure><img src="img/tsne_speaker_OAF2YAF.png"><figcaption>Figure B5. Unseen speaker (trained on OAF, tested on YAF). The clusters are looser (silhouette 0.66 speech, 0.59 fusion), and happy (orange) runs into angry (red): failure case 1 seen in the representation.</figcaption></figure>
+<table>
+<tr><th>Representation</th><th class="n">Silhouette: unseen words</th><th class="n">Silhouette: unseen speaker</th></tr>
+<tr><td>Temporal block (speech model)</td><td class="n">0.974</td><td class="n">0.665</td></tr>
+<tr><td>Contextual block (text model)</td><td class="n">−0.017</td><td class="n">−0.005</td></tr>
+<tr><td>Fusion block (gated fusion)</td><td class="n">0.979</td><td class="n">0.587</td></tr>
+</table>
+<p>Two further points. In Figure B4 each emotion cluster splits into two sub-clusters, one per actress: the representation separates emotion first but still encodes the speaker within each emotion. An unseen voice therefore falls between the learned sub-clusters rather than inside them. Second, the fusion representation equals its speech branch (identical silhouettes), as expected with a gate of 1.</p>
+
+<h2>B8. Limitations and next steps</h2>
+<ul>
+<li>With two speakers, "speaker-independent" is a single held-out voice per direction. The large gap between the two directions shows how much the result depends on which voice is held out. A dataset with many speakers (CREMA-D, RAVDESS) would give a real estimate.</li>
+<li>The text modality is uninformative by design here, so this setup can show only that fusion does no harm, not that it helps.</li>
+<li>The most direct fix for the speaker gap is more speakers in training. Without them, two options would test the tempo explanation: augmenting with speed and pitch perturbation, or an adversarial speaker classifier on the pooled representation.</li>
+</ul>
+
+</body>
+</html>

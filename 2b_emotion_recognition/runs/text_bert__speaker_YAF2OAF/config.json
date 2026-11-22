@@ -1,0 +1,15 @@
+{
+ "epochs": 40,
+ "patience": 8,
+ "lr": 0.001,
+ "weight_decay": 0.01,
+ "batch_size": 32,
+ "pipeline": "text",
+ "features": "bert",
+ "split": "speaker_YAF2OAF",
+ "seed": 0,
+ "variant": "text_bert",
+ "best_epoch": 9,
+ "best_val_macro_f1": 0.08260051864023828,
+ "train_seconds": 5.7
+}

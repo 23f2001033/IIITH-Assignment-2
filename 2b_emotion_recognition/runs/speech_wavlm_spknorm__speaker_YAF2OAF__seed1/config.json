@@ -1,0 +1,16 @@
+{
+ "epochs": 40,
+ "patience": 8,
+ "lr": 0.001,
+ "weight_decay": 0.01,
+ "batch_size": 32,
+ "pipeline": "speech",
+ "features": "wavlm",
+ "speaker_norm": true,
+ "split": "speaker_YAF2OAF",
+ "seed": 1,
+ "variant": "speech_wavlm_spknorm",
+ "best_epoch": 40,
+ "best_val_macro_f1": 1.0,
+ "train_seconds": 49.7
+}

@@ -1,0 +1,9 @@
+comparison,files,boundaries,mean_abs_ms,median_abs_ms,p90_abs_ms,max_abs_ms,pct_within_20ms,pct_within_50ms
+A_arpa vs B_mfa,news,456,8.2,10.0,20.0,250.0,91.9,97.6
+A_arpa vs B_mfa,isle,30,172.8,10.0,160.0,2460.0,63.3,76.7
+A_arpa vs C_adapted,news,456,0.1,0.0,0.0,10.0,100.0,100.0
+A_arpa vs C_adapted,isle,30,0.0,0.0,0.0,0.0,100.0,100.0
+A_arpa vs D_no_g2p,news,456,0.6,0.0,0.0,20.0,99.1,100.0
+A_arpa vs D_no_g2p,isle,30,0.0,0.0,0.0,0.0,100.0,100.0
+A_arpa vs A_default_beam,news,456,0.1,0.0,0.0,10.0,100.0,100.0
+A_arpa vs A_default_beam,isle,30,2.3,0.0,0.0,50.0,93.3,100.0

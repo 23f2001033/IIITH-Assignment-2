@@ -1,0 +1,6 @@
+# Hand-checked corrections to G2P output for english_us_mfa (MFA's IPA-based phone set).
+# Tokens starting with @ copy the pronunciation of that word from the base dictionary.
+c's           @seas                  # G2P gave "kʰ z": the letter C is read "see"
+r's           @are z                 # G2P gave "ɹ z": the letter R is read "are"
+depoliticize  d iː p ə l ɪ t ɪ s aj z  # G2P gave dʲ iː p ə ʎ ɪ tʲ ɪ s aj z (palatal ʎ is wrong)
+dukakis       @do k ɑ k ɪ s          # G2P gave d ɐ cʰ æ c ɪ s: wrong vowels, stress on KAH

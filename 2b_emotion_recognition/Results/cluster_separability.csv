@@ -1,0 +1,11 @@
+split,block,run,silhouette_emotion,silhouette_speaker
+word_s0,Temporal block (speech model),speech_wavlm__word_s0,0.974,-0.003
+word_s0,Contextual block (text model),text_bert__word_s0,-0.017,-0.005
+word_s0,Fusion block (gated fusion),fusion_gated__word_s0,0.979,-0.003
+word_s0,Speech branch inside fusion,fusion_gated__word_s0,0.979,-0.003
+word_s0,Text branch inside fusion,fusion_gated__word_s0,-0.017,-0.005
+speaker_OAF2YAF,Temporal block (speech model),speech_wavlm__speaker_OAF2YAF__seed0,0.665,
+speaker_OAF2YAF,Contextual block (text model),text_bert__speaker_OAF2YAF,-0.005,
+speaker_OAF2YAF,Fusion block (gated fusion),fusion_gated__speaker_OAF2YAF__seed0,0.587,
+speaker_OAF2YAF,Speech branch inside fusion,fusion_gated__speaker_OAF2YAF__seed0,0.587,
+speaker_OAF2YAF,Text branch inside fusion,fusion_gated__speaker_OAF2YAF__seed0,-0.005,

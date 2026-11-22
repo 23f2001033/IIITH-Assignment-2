@@ -1,0 +1,4 @@
+# Hand-checked corrections to G2P output for english_us_arpa (ARPAbet, stress digits on vowels).
+# Tokens starting with @ copy the pronunciation of that word from the base dictionary.
+depoliticize  D IY0 P AH0 L IH1 T IH0 S AY2 Z  # G2P gave D EH1 P AH0 L AY1 T AH0 S AY2 Z: wrong first vowel and stress
+dukakis       D UW0 K AA1 K AH0 S    # G2P stressed the first syllable; the name is du-KAH-kis

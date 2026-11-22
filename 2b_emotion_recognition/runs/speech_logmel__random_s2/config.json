@@ -1,0 +1,15 @@
+{
+ "epochs": 40,
+ "patience": 8,
+ "lr": 0.001,
+ "weight_decay": 0.01,
+ "batch_size": 32,
+ "pipeline": "speech",
+ "features": "logmel",
+ "split": "random_s2",
+ "seed": 2,
+ "variant": "speech_logmel",
+ "best_epoch": 15,
+ "best_val_macro_f1": 1.0,
+ "train_seconds": 64.0
+}

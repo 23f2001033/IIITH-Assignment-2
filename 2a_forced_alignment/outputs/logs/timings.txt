@@ -1,0 +1,5 @@
+A_arpa 100s
+B_mfa 66s
+D_no_g2p 104s
+A_default_beam 99s
+C_adapted 101s

@@ -1,0 +1,300 @@
+run,file,flag,phone,word,start,end
+A_arpa,F2BJRLP1,phone at 30 ms floor,DH,the,2.23,2.26
+A_arpa,F2BJRLP1,phone at 30 ms floor,AH0,massachusetts,2.57,2.6
+A_arpa,F2BJRLP1,phone at 30 ms floor,S,massachusetts,3.02,3.05
+A_arpa,F2BJRLP1,phone at 30 ms floor,N,current,5.72,5.75
+A_arpa,F2BJRLP1,phone at 30 ms floor,EH1,hennessy,6.57,6.6
+A_arpa,F2BJRLP1,phone at 30 ms floor,N,mandatory,7.95,7.98
+A_arpa,F2BJRLP1,phone at 30 ms floor,AO2,mandatory,8.19,8.22
+A_arpa,F2BJRLP1,phone at 30 ms floor,N,retirement,8.95,8.98
+A_arpa,F2BJRLP1,phone at 30 ms floor,N,and,10.14,10.17
+A_arpa,F2BJRLP1,phone at 30 ms floor,IH0,expected,11.39,11.42
+A_arpa,F2BJRLP1,phone at 30 ms floor,T,it,13.08,13.11
+A_arpa,F2BJRLP1,phone at 30 ms floor,IH0,important,13.72,13.75
+A_arpa,F2BJRLP1,phone at 30 ms floor,AO1,important,13.91,13.94
+A_arpa,F2BJRLP1,phone at 30 ms floor,T,important,14.03,14.06
+A_arpa,F2BJRLP1,phone at 30 ms floor,N,important,14.1,14.13
+A_arpa,F2BJRLP1,phone at 30 ms floor,T,important,14.13,14.16
+A_arpa,F2BJRLP1,phone at 30 ms floor,N,appointment,14.46,14.49
+A_arpa,F2BJRLP1,phone at 30 ms floor,T,appointment,14.49,14.52
+A_arpa,F2BJRLP1,phone at 30 ms floor,N,appointment,14.65,14.68
+A_arpa,F2BJRLP1,phone at 30 ms floor,L,michael,15.41,15.44
+A_arpa,F2BJRLP1,phone at 30 ms floor,R,during,16.8,16.83
+A_arpa,F2BJRLP1,phone at 30 ms floor,AH0,the,16.99,17.02
+A_arpa,F2BJRLP1,phone at 30 ms floor,N,remainder,17.34,17.37
+A_arpa,F2BJRLP1,phone at 30 ms floor,N,administration,17.96,17.99
+A_arpa,F2BJRLP1,phone at 30 ms floor,B,w,20.67,20.7
+A_arpa,F2BJRLP1,phone at 30 ms floor,AH0,w,20.7,20.71
+A_arpa,F2BJRLP1,phone at 30 ms floor,L,w,20.71,20.74
+A_arpa,F2BJRLP1,phone at 30 ms floor,AA1,margo,21.5,21.53
+A_arpa,F2BJRLP1,phone at 30 ms floor,AH0,will,23.44,23.45
+A_arpa,F2BJRLP1,phone at 30 ms floor,AA1,hard,23.9,23.93
+A_arpa,F2BJRLP1,pause >= 300 ms,,hennessy | reaches,6.97,7.36
+A_arpa,F2BJRLP1,pause >= 300 ms,,march | it,12.62,13.01
+A_arpa,F2BJRLP1,pause >= 300 ms,,makes | during,16.4,16.71
+A_arpa,F2BJRLP1,pause >= 300 ms,,toughest | as,19.98,20.36
+A_arpa,F2BJRLP2,phone at 30 ms floor,N,seventy,0.78,0.81
+A_arpa,F2BJRLP2,phone at 30 ms floor,T,seventy,0.81,0.84
+A_arpa,F2BJRLP2,phone at 30 ms floor,T,democratic,1.9,1.93
+A_arpa,F2BJRLP2,phone at 30 ms floor,L,michael,2.69,2.72
+A_arpa,F2BJRLP2,phone at 30 ms floor,UH0,fulfilled,3.68,3.71
+A_arpa,F2BJRLP2,phone at 30 ms floor,L,fulfilled,3.71,3.74
+A_arpa,F2BJRLP2,phone at 30 ms floor,N,appointments,7.33,7.36
+A_arpa,F2BJRLP2,phone at 30 ms floor,T,appointments,7.36,7.39
+A_arpa,F2BJRLP2,phone at 30 ms floor,M,appointments,7.39,7.42
+A_arpa,F2BJRLP2,phone at 30 ms floor,N,appointments,7.5,7.53
+A_arpa,F2BJRLP2,phone at 30 ms floor,UW1,to,10.23,10.26
+A_arpa,F2BJRLP2,phone at 30 ms floor,AH0,supreme,11.06,11.09
+A_arpa,F2BJRLP2,phone at 30 ms floor,R,for,13.14,13.17
+A_arpa,F2BJRLP2,phone at 30 ms floor,ER0,for,13.17,13.2
+A_arpa,F2BJRLP2,phone at 30 ms floor,G,distinguished,15.44,15.47
+A_arpa,F2BJRLP2,phone at 30 ms floor,T,distinguished,15.65,15.68
+A_arpa,F2BJRLP2,phone at 30 ms floor,T,appointment,19.07,19.1
+A_arpa,F2BJRLP2,phone at 30 ms floor,M,appointment,19.1,19.13
+A_arpa,F2BJRLP2,phone at 30 ms floor,AH0,supreme,20.21,20.24
+A_arpa,F2BJRLP2,phone at 30 ms floor,AO1,court,20.65,20.68
+A_arpa,F2BJRLP2,phone at 30 ms floor,T,seventy,22.2,22.23
+A_arpa,F2BJRLP2,phone at 30 ms floor,R,president,24.62,24.65
+A_arpa,F2BJRLP2,phone at 30 ms floor,AH0,massachusetts,25.47,25.5
+A_arpa,F2BJRLP2,phone at 30 ms floor,UW1,massachusetts,25.61,25.64
+A_arpa,F2BJRLP2,phone at 30 ms floor,S,massachusetts,25.82,25.85
+A_arpa,F2BJRLP2,pause >= 300 ms,,court | for,12.33,13.03
+A_arpa,F2BJRLP2,pause >= 300 ms,,career | that,16.1,16.45
+A_arpa,F2BJRLP2,pause >= 300 ms,,one | that,22.65,23.16
+A_arpa,F2BJRLP2,pause >= 300 ms,,association | was,26.86,27.2
+A_arpa,F2BJRLP3,phone at 30 ms floor,T,eight,1.37,1.4
+A_arpa,F2BJRLP3,phone at 30 ms floor,N,hundred,1.54,1.57
+A_arpa,F2BJRLP3,phone at 30 ms floor,AO1,court,2.46,2.49
+A_arpa,F2BJRLP3,phone at 30 ms floor,EH1,hennessy,3.56,3.59
+A_arpa,F2BJRLP3,phone at 30 ms floor,R,for,5.19,5.22
+A_arpa,F2BJRLP3,phone at 30 ms floor,G,legal,5.61,5.64
+A_arpa,F2BJRLP3,phone at 30 ms floor,IH1,administrative,7.01,7.04
+A_arpa,F2BJRLP3,phone at 30 ms floor,T,administrative,7.37,7.4
+A_arpa,F2BJRLP3,phone at 30 ms floor,IH0,administrative,7.4,7.43
+A_arpa,F2BJRLP3,phone at 30 ms floor,D,credit,10.59,10.62
+A_arpa,F2BJRLP3,phone at 30 ms floor,R,for,11.07,11.1
+A_arpa,F2BJRLP3,phone at 30 ms floor,T,court,11.83,11.86
+A_arpa,F2BJRLP3,phone at 30 ms floor,AE1,that,12.46,12.49
+A_arpa,F2BJRLP3,phone at 30 ms floor,B,began,12.56,12.59
+A_arpa,F2BJRLP3,phone at 30 ms floor,D,decade,13.28,13.31
+A_arpa,F2BJRLP3,phone at 30 ms floor,L,legislative,15.15,15.18
+A_arpa,F2BJRLP3,phone at 30 ms floor,D,and,18.18,18.21
+A_arpa,F2BJRLP3,phone at 30 ms floor,IH1,million,18.85,18.88
+A_arpa,F2BJRLP3,phone at 30 ms floor,AO1,court,20.93,20.96
+A_arpa,F2BJRLP3,phone at 30 ms floor,T,court,21.04,21.07
+A_arpa,F2BJRLP3,phone at 30 ms floor,EH1,hennessy,24.87,24.9
+A_arpa,F2BJRLP3,phone at 30 ms floor,N,recently,25.42,25.45
+A_arpa,F2BJRLP3,phone at 30 ms floor,D,urged,25.88,25.91
+A_arpa,F2BJRLP3,phone at 30 ms floor,AH0,the,26.46,26.49
+A_arpa,F2BJRLP3,phone at 30 ms floor,R,retreat,28.38,28.41
+A_arpa,F2BJRLP3,phone at 30 ms floor,T,retreat,28.56,28.59
+A_arpa,F2BJRLP3,pause >= 300 ms,,opinions | hennessy,3.16,3.48
+A_arpa,F2BJRLP3,pause >= 300 ms,,abilities | admirers,8.12,8.53
+A_arpa,F2BJRLP3,pause >= 300 ms,,judgeships | and,17.73,18.05
+A_arpa,F2BJRLP3,pause >= 300 ms,,houses | despite,21.63,22.17
+A_arpa,F2BJRLP3,pause >= 300 ms,,deficit | hennessy,24.42,24.79
+B_mfa,F2BJRLP1,phone at 30 ms floor,tʲ,justice,1.85,1.88
+B_mfa,F2BJRLP1,phone at 30 ms floor,ə,massachusetts,2.57,2.6
+B_mfa,F2BJRLP1,phone at 30 ms floor,s,massachusetts,3.01,3.04
+B_mfa,F2BJRLP1,phone at 30 ms floor,ʉ,supreme,3.11,3.14
+B_mfa,F2BJRLP1,phone at 30 ms floor,ɹ,current,5.62,5.65
+B_mfa,F2BJRLP1,phone at 30 ms floor,n,mandatory,7.96,7.99
+B_mfa,F2BJRLP1,phone at 30 ms floor,n,retirement,8.95,8.98
+B_mfa,F2BJRLP1,phone at 30 ms floor,ɪ,expected,11.39,11.42
+B_mfa,F2BJRLP1,phone at 30 ms floor,d,expected,11.42,11.45
+B_mfa,F2BJRLP1,phone at 30 ms floor,ə,to,11.52,11.55
+B_mfa,F2BJRLP1,phone at 30 ms floor,t,it,13.08,13.11
+B_mfa,F2BJRLP1,phone at 30 ms floor,ɪ,important,13.72,13.75
+B_mfa,F2BJRLP1,phone at 30 ms floor,t,important,14.03,14.06
+B_mfa,F2BJRLP1,phone at 30 ms floor,n,important,14.1,14.13
+B_mfa,F2BJRLP1,phone at 30 ms floor,t,important,14.13,14.16
+B_mfa,F2BJRLP1,phone at 30 ms floor,m,appointment,14.53,14.56
+B_mfa,F2BJRLP1,phone at 30 ms floor,ə,michael,15.38,15.41
+B_mfa,F2BJRLP1,phone at 30 ms floor,ɫ,michael,15.41,15.44
+B_mfa,F2BJRLP1,phone at 30 ms floor,ʉː,dukakis,15.5,15.53
+B_mfa,F2BJRLP1,phone at 30 ms floor,ʊ,during,16.76,16.78
+B_mfa,F2BJRLP1,phone at 30 ms floor,d̪,the,16.96,16.99
+B_mfa,F2BJRLP1,phone at 30 ms floor,ə,the,16.99,17.02
+B_mfa,F2BJRLP1,phone at 30 ms floor,n,remainder,17.34,17.37
+B_mfa,F2BJRLP1,phone at 30 ms floor,ə,of,17.52,17.55
+B_mfa,F2BJRLP1,phone at 30 ms floor,n,administration,17.96,17.99
+B_mfa,F2BJRLP1,phone at 30 ms floor,n,one,19.14,19.17
+B_mfa,F2BJRLP1,phone at 30 ms floor,ɛ,melnicove,21.8,21.83
+B_mfa,F2BJRLP1,phone at 30 ms floor,ɫ,will,23.47,23.5
+B_mfa,F2BJRLP1,phone at 30 ms floor,ɑ,hard,23.91,23.94
+B_mfa,F2BJRLP1,phone at 30 ms floor,t,act,24.47,24.5
+B_mfa,F2BJRLP1,phone at 30 ms floor,ə,to,24.55,24.58
+B_mfa,F2BJRLP1,pause >= 300 ms,,hennessy | reaches,6.97,7.35
+B_mfa,F2BJRLP1,pause >= 300 ms,,march | it,12.62,13.0
+B_mfa,F2BJRLP1,pause >= 300 ms,,toughest | as,20.0,20.35
+B_mfa,F2BJRLP2,phone at 30 ms floor,n,nineteen,0.31,0.34
+B_mfa,F2BJRLP2,phone at 30 ms floor,n,seventy,0.78,0.81
+B_mfa,F2BJRLP2,phone at 30 ms floor,tʲ,seventy,0.81,0.84
+B_mfa,F2BJRLP2,phone at 30 ms floor,tʲ,democratic,1.9,1.93
+B_mfa,F2BJRLP2,phone at 30 ms floor,n,governor,2.28,2.31
+B_mfa,F2BJRLP2,phone at 30 ms floor,ə,michael,2.66,2.69
+B_mfa,F2BJRLP2,phone at 30 ms floor,ɫ,michael,2.69,2.72
+B_mfa,F2BJRLP2,phone at 30 ms floor,m,campaign,4.36,4.39
+B_mfa,F2BJRLP2,phone at 30 ms floor,t,depoliticize,5.93,5.96
+B_mfa,F2BJRLP2,phone at 30 ms floor,m,appointments,7.39,7.42
+B_mfa,F2BJRLP2,phone at 30 ms floor,bʲ,republican,8.8,8.83
+B_mfa,F2BJRLP2,phone at 30 ms floor,ʉ,supreme,11.06,11.09
+B_mfa,F2BJRLP2,phone at 30 ms floor,ɫ,judicial,11.83,11.86
+B_mfa,F2BJRLP2,phone at 30 ms floor,ɐ,was,13.8,13.82
+B_mfa,F2BJRLP2,phone at 30 ms floor,ɪ,distinguished,15.53,15.56
+B_mfa,F2BJRLP2,phone at 30 ms floor,t,distinguished,15.67,15.7
+B_mfa,F2BJRLP2,phone at 30 ms floor,ʉː,to,18.59,18.62
+B_mfa,F2BJRLP2,phone at 30 ms floor,m,appointment,19.1,19.13
+B_mfa,F2BJRLP2,phone at 30 ms floor,ʉ,supreme,20.21,20.24
+B_mfa,F2BJRLP2,phone at 30 ms floor,ɒ,court,20.66,20.69
+B_mfa,F2BJRLP2,phone at 30 ms floor,n,nineteen,21.49,21.52
+B_mfa,F2BJRLP2,phone at 30 ms floor,n,nineteen,21.63,21.66
+B_mfa,F2BJRLP2,phone at 30 ms floor,tʲ,seventy,22.2,22.23
+B_mfa,F2BJRLP2,phone at 30 ms floor,d,president,24.83,24.86
+B_mfa,F2BJRLP2,phone at 30 ms floor,v,of,25.1,25.13
+B_mfa,F2BJRLP2,phone at 30 ms floor,ə,massachusetts,25.47,25.5
+B_mfa,F2BJRLP2,phone at 30 ms floor,ʉː,massachusetts,25.61,25.64
+B_mfa,F2BJRLP2,phone at 30 ms floor,ɐ,was,27.25,27.27
+B_mfa,F2BJRLP2,phone at 30 ms floor,ɲ,hennessy's,27.46,27.49
+B_mfa,F2BJRLP2,phone at 30 ms floor,l,clerk,28.15,28.18
+B_mfa,F2BJRLP2,pause >= 300 ms,,court | for,12.33,13.03
+B_mfa,F2BJRLP2,pause >= 300 ms,,career | that,16.1,16.43
+B_mfa,F2BJRLP2,pause >= 300 ms,,one | that,22.65,23.16
+B_mfa,F2BJRLP2,pause >= 300 ms,,association | was,26.86,27.2
+B_mfa,F2BJRLP3,phone at 30 ms floor,t,eight,1.37,1.4
+B_mfa,F2BJRLP3,phone at 30 ms floor,ʉ,supreme,2.1,2.13
+B_mfa,F2BJRLP3,phone at 30 ms floor,ɒ,court,2.46,2.49
+B_mfa,F2BJRLP3,phone at 30 ms floor,ə,opinions,2.59,2.62
+B_mfa,F2BJRLP3,phone at 30 ms floor,ɛ,hennessy,3.56,3.59
+B_mfa,F2BJRLP3,phone at 30 ms floor,ɒ,for,5.2,5.23
+B_mfa,F2BJRLP3,phone at 30 ms floor,ɡ,legal,5.61,5.64
+B_mfa,F2BJRLP3,phone at 30 ms floor,p,scholarship,6.37,6.4
+B_mfa,F2BJRLP3,phone at 30 ms floor,n,and,6.59,6.62
+B_mfa,F2BJRLP3,phone at 30 ms floor,ɪ,administrative,7.01,7.04
+B_mfa,F2BJRLP3,phone at 30 ms floor,tʲ,administrative,7.37,7.4
+B_mfa,F2BJRLP3,phone at 30 ms floor,ɪ,administrative,7.4,7.43
+B_mfa,F2BJRLP3,phone at 30 ms floor,ɪ,abilities,7.79,7.82
+B_mfa,F2BJRLP3,phone at 30 ms floor,ɲ,hennessy,9.68,9.71
+B_mfa,F2BJRLP3,phone at 30 ms floor,v,of,10.27,10.3
+B_mfa,F2BJRLP3,phone at 30 ms floor,ə,the,10.35,10.38
+B_mfa,F2BJRLP3,phone at 30 ms floor,dʲ,credit,10.59,10.62
+B_mfa,F2BJRLP3,phone at 30 ms floor,ɒ,for,11.08,11.11
+B_mfa,F2BJRLP3,phone at 30 ms floor,ɒ,court,11.71,11.74
+B_mfa,F2BJRLP3,phone at 30 ms floor,t,court,11.83,11.86
+B_mfa,F2BJRLP3,phone at 30 ms floor,ð,that,12.42,12.45
+B_mfa,F2BJRLP3,phone at 30 ms floor,n,began,12.84,12.87
+B_mfa,F2BJRLP3,phone at 30 ms floor,tʲ,legislative,15.26,15.29
+B_mfa,F2BJRLP3,phone at 30 ms floor,ə,approval,15.76,15.79
+B_mfa,F2BJRLP3,phone at 30 ms floor,ɪ,million,18.85,18.88
+B_mfa,F2BJRLP3,phone at 30 ms floor,ɒ,court,20.93,20.96
+B_mfa,F2BJRLP3,phone at 30 ms floor,t,court,21.04,21.07
+B_mfa,F2BJRLP3,phone at 30 ms floor,ɪ,despite,22.22,22.25
+B_mfa,F2BJRLP3,phone at 30 ms floor,ə,the,22.63,22.66
+B_mfa,F2BJRLP3,phone at 30 ms floor,ɛ,hennessy,24.87,24.9
+B_mfa,F2BJRLP3,phone at 30 ms floor,n,recently,25.43,25.46
+B_mfa,F2BJRLP3,phone at 30 ms floor,d,urged,25.87,25.9
+B_mfa,F2BJRLP3,phone at 30 ms floor,d̪,the,26.43,26.46
+B_mfa,F2BJRLP3,phone at 30 ms floor,ə,the,26.46,26.49
+B_mfa,F2BJRLP3,phone at 30 ms floor,t,retreat,28.56,28.59
+B_mfa,F2BJRLP3,phone at 30 ms floor,ɹ,from,28.79,28.82
+B_mfa,F2BJRLP3,phone at 30 ms floor,ə,from,28.82,28.85
+B_mfa,F2BJRLP3,pause >= 300 ms,,opinions | hennessy,3.17,3.49
+B_mfa,F2BJRLP3,pause >= 300 ms,,abilities | admirers,8.14,8.53
+B_mfa,F2BJRLP3,pause >= 300 ms,,houses | despite,21.63,22.18
+B_mfa,F2BJRLP3,pause >= 300 ms,,deficit | hennessy,24.43,24.8
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,DH,the,2.23,2.26
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,AH0,massachusetts,2.57,2.6
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,S,massachusetts,3.02,3.05
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,N,current,5.72,5.75
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,EH1,hennessy,6.57,6.6
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,N,mandatory,7.95,7.98
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,AO2,mandatory,8.19,8.22
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,N,retirement,8.95,8.98
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,N,and,10.14,10.17
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,IH0,expected,11.39,11.42
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,T,it,13.08,13.11
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,IH0,important,13.72,13.75
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,AO1,important,13.91,13.94
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,T,important,14.03,14.06
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,N,important,14.1,14.13
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,T,important,14.13,14.16
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,N,appointment,14.46,14.49
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,T,appointment,14.49,14.52
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,N,appointment,14.65,14.68
+D_no_g2p,F2BJRLP1,unknown word (spn),spn,dukakis,15.45,16.0
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,R,during,16.8,16.83
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,AH0,the,16.99,17.02
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,N,remainder,17.34,17.37
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,N,administration,17.96,17.99
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,B,w,20.67,20.7
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,AH0,w,20.7,20.71
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,L,w,20.71,20.74
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,AA1,margo,21.5,21.53
+D_no_g2p,F2BJRLP1,unknown word (spn),spn,melnicove,21.75,22.28
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,AH0,will,23.44,23.45
+D_no_g2p,F2BJRLP1,phone at 30 ms floor,AA1,hard,23.9,23.93
+D_no_g2p,F2BJRLP1,pause >= 300 ms,,hennessy | reaches,6.97,7.36
+D_no_g2p,F2BJRLP1,pause >= 300 ms,,march | it,12.62,13.01
+D_no_g2p,F2BJRLP1,pause >= 300 ms,,makes | during,16.4,16.71
+D_no_g2p,F2BJRLP1,pause >= 300 ms,,toughest | as,19.98,20.36
+D_no_g2p,F2BJRLP2,phone at 30 ms floor,N,seventy,0.78,0.81
+D_no_g2p,F2BJRLP2,phone at 30 ms floor,T,seventy,0.81,0.84
+D_no_g2p,F2BJRLP2,phone at 30 ms floor,T,democratic,1.9,1.93
+D_no_g2p,F2BJRLP2,unknown word (spn),spn,dukakis,2.73,3.35
+D_no_g2p,F2BJRLP2,phone at 30 ms floor,UH0,fulfilled,3.68,3.71
+D_no_g2p,F2BJRLP2,phone at 30 ms floor,L,fulfilled,3.71,3.74
+D_no_g2p,F2BJRLP2,unknown word (spn),spn,depoliticize,5.42,6.53
+D_no_g2p,F2BJRLP2,phone at 30 ms floor,N,appointments,7.33,7.36
+D_no_g2p,F2BJRLP2,phone at 30 ms floor,T,appointments,7.36,7.39
+D_no_g2p,F2BJRLP2,phone at 30 ms floor,M,appointments,7.39,7.42
+D_no_g2p,F2BJRLP2,phone at 30 ms floor,N,appointments,7.5,7.53
+D_no_g2p,F2BJRLP2,phone at 30 ms floor,UW1,to,10.23,10.26
+D_no_g2p,F2BJRLP2,phone at 30 ms floor,AH0,supreme,11.06,11.09
+D_no_g2p,F2BJRLP2,phone at 30 ms floor,R,for,13.14,13.17
+D_no_g2p,F2BJRLP2,phone at 30 ms floor,ER0,for,13.17,13.2
+D_no_g2p,F2BJRLP2,phone at 30 ms floor,G,distinguished,15.44,15.47
+D_no_g2p,F2BJRLP2,phone at 30 ms floor,T,distinguished,15.65,15.68
+D_no_g2p,F2BJRLP2,phone at 30 ms floor,T,appointment,19.07,19.1
+D_no_g2p,F2BJRLP2,phone at 30 ms floor,M,appointment,19.1,19.13
+D_no_g2p,F2BJRLP2,phone at 30 ms floor,AH0,supreme,20.21,20.24
+D_no_g2p,F2BJRLP2,phone at 30 ms floor,AO1,court,20.65,20.68
+D_no_g2p,F2BJRLP2,phone at 30 ms floor,T,seventy,22.2,22.23
+D_no_g2p,F2BJRLP2,unknown word (spn),spn,maffy,23.92,24.34
+D_no_g2p,F2BJRLP2,phone at 30 ms floor,R,president,24.62,24.65
+D_no_g2p,F2BJRLP2,phone at 30 ms floor,AH0,massachusetts,25.47,25.5
+D_no_g2p,F2BJRLP2,phone at 30 ms floor,UW1,massachusetts,25.61,25.64
+D_no_g2p,F2BJRLP2,phone at 30 ms floor,S,massachusetts,25.82,25.85
+D_no_g2p,F2BJRLP2,pause >= 300 ms,,court | for,12.33,13.03
+D_no_g2p,F2BJRLP2,pause >= 300 ms,,career | that,16.1,16.45
+D_no_g2p,F2BJRLP2,pause >= 300 ms,,one | that,22.65,23.16
+D_no_g2p,F2BJRLP2,pause >= 300 ms,,association | was,26.86,27.2
+D_no_g2p,F2BJRLP3,phone at 30 ms floor,T,eight,1.37,1.4
+D_no_g2p,F2BJRLP3,phone at 30 ms floor,N,hundred,1.54,1.57
+D_no_g2p,F2BJRLP3,phone at 30 ms floor,AO1,court,2.46,2.49
+D_no_g2p,F2BJRLP3,phone at 30 ms floor,EH1,hennessy,3.56,3.59
+D_no_g2p,F2BJRLP3,phone at 30 ms floor,R,for,5.19,5.22
+D_no_g2p,F2BJRLP3,phone at 30 ms floor,G,legal,5.61,5.64
+D_no_g2p,F2BJRLP3,phone at 30 ms floor,IH1,administrative,7.01,7.04
+D_no_g2p,F2BJRLP3,phone at 30 ms floor,T,administrative,7.37,7.4
+D_no_g2p,F2BJRLP3,phone at 30 ms floor,IH0,administrative,7.4,7.43
+D_no_g2p,F2BJRLP3,phone at 30 ms floor,D,credit,10.59,10.62
+D_no_g2p,F2BJRLP3,phone at 30 ms floor,R,for,11.07,11.1
+D_no_g2p,F2BJRLP3,phone at 30 ms floor,T,court,11.83,11.86
+D_no_g2p,F2BJRLP3,phone at 30 ms floor,AE1,that,12.46,12.49
+D_no_g2p,F2BJRLP3,phone at 30 ms floor,B,began,12.56,12.59
+D_no_g2p,F2BJRLP3,phone at 30 ms floor,D,decade,13.28,13.31
+D_no_g2p,F2BJRLP3,phone at 30 ms floor,L,legislative,15.15,15.18
+D_no_g2p,F2BJRLP3,phone at 30 ms floor,D,and,18.18,18.21
+D_no_g2p,F2BJRLP3,phone at 30 ms floor,AO1,court,20.93,20.96
+D_no_g2p,F2BJRLP3,phone at 30 ms floor,T,court,21.04,21.07
+D_no_g2p,F2BJRLP3,phone at 30 ms floor,EH1,hennessy,24.87,24.9
+D_no_g2p,F2BJRLP3,phone at 30 ms floor,N,recently,25.42,25.45
+D_no_g2p,F2BJRLP3,phone at 30 ms floor,D,urged,25.88,25.91
+D_no_g2p,F2BJRLP3,phone at 30 ms floor,AH0,the,26.46,26.49
+D_no_g2p,F2BJRLP3,phone at 30 ms floor,R,retreat,28.38,28.41
+D_no_g2p,F2BJRLP3,phone at 30 ms floor,T,retreat,28.56,28.59
+D_no_g2p,F2BJRLP3,pause >= 300 ms,,opinions | hennessy,3.16,3.48
+D_no_g2p,F2BJRLP3,pause >= 300 ms,,abilities | admirers,8.12,8.53
+D_no_g2p,F2BJRLP3,pause >= 300 ms,,judgeships | and,17.73,18.05
+D_no_g2p,F2BJRLP3,pause >= 300 ms,,houses | despite,21.63,22.17
+D_no_g2p,F2BJRLP3,pause >= 300 ms,,deficit | hennessy,24.42,24.79

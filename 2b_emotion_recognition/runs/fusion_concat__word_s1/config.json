@@ -1,0 +1,16 @@
+{
+ "epochs": 40,
+ "patience": 8,
+ "lr": 0.001,
+ "weight_decay": 0.01,
+ "batch_size": 32,
+ "pipeline": "fusion",
+ "fusion": "concat",
+ "speech_features": "wavlm",
+ "split": "word_s1",
+ "seed": 1,
+ "variant": "fusion_concat",
+ "best_epoch": 6,
+ "best_val_macro_f1": 1.0,
+ "train_seconds": 35.0
+}
